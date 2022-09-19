@@ -25,14 +25,14 @@ def extractAndTidyCurated(experimentDate,experimentFolderPath,preprocFolder,stra
                     if pos in list(posToStrainDic.keys()): # just another way to control for the list of positions that are considered
                         strain=posToStrainDic[re.search(rxPos,outputFolder).group(1)] #saves strain based on the position
                         outputFolder=outputFolder[:-4]
-                        outputPath="%s/curated_data/%s_%s_curated/%s_curated"%(experimentFolderPath,experimentDate,strain,outputFolder) #date_bottom|top_strain_curated
+                        outputPath="%s/curated_data/%s_%s_curated"%(experimentFolderPath,experimentDate,strain) #date_bottom|top_strain_curated
                     #print(outputFolder)
                         if "curated" not in fullPath: #avoid copying already curated files
                             try: 
-                                shutil.copytree(outputFolderPath,outputPath)
-                                print("Copying %s to %s."%(outputFolderPath,outputPath))
+                                shutil.copy(fullPath,outputPath)
+                                print("Copying %s to %s."%(fullPath,outputPath))
                             except:
-                                print("Error for %s: cannot copy curated folder. Curated folder certainly already exists."%(outputFolderPath))
+                                print("Error for %s: cannot copy curated folder. Curated CSV file certainly already exists."%(outputFolderPath))
                         
 def walklevel(some_dir, level=1):
     some_dir = some_dir.rstrip(os.path.sep)
